@@ -13,7 +13,7 @@ def create_folders(main_folder, sub_folders):
 
 def move_file(file_path, destination_folder):
     shutil.move(file_path, destination_folder)
-    print(f"{os.path.basename(file_path)} moved to {destination_folder}")
+    print("{} moved to {}".format(os.path.basename(file_path), destination_folder))
 
 def display_image(image_path):
     img = Image.open(image_path)
@@ -33,7 +33,7 @@ def main():
     i = 1
     
     while True:
-        sub_folder = input(f"Input nama sub-folder {i}: ")
+        sub_folder = input("Input nama sub-folder {}: ".format(i)) 
         if sub_folder.lower() == 'q':
             break
         sub_folders.append(sub_folder)
@@ -50,7 +50,7 @@ def main():
             continue
         
         display_image(file_path)
-        print(f"Input shortcut number to move {filename} or 'p' to undo last move or 'l' to skip:")
+        print("Input shortcut number to move {} or 'p' to undo last move or 'l' to skip:".format(filename))
 
         while True:
             choice = input().strip().lower()
@@ -63,10 +63,10 @@ def main():
             elif choice == 'p' and undo_stack:
                 last_move = undo_stack.pop()
                 shutil.move(last_move[0], last_move[1])
-                print(f"{os.path.basename(last_move[0])} moved back to downloads folder")
+                print("{} moved back to downloads folder".format(os.path.basename(last_move[0])))
                 break
             elif choice == 'l':
-                print(f"Skipped {filename}")
+                print("Skipped {}".format(filename))
                 break
             else:
                 print("Invalid choice. Try again.")
