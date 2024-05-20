@@ -1,5 +1,3 @@
-#Check
-
 import os
 import shutil
 from PIL import Image
@@ -52,20 +50,23 @@ def main():
             continue
         
         display_image(file_path)
-        print(f"Input shortcut number to move {filename} or 'p' to undo last move:")
-        
+        print(f"Input shortcut number to move {filename} or 'p' to undo last move or 'l' to skip:")
+
         while True:
             choice = input().strip().lower()
             
             if choice in shortcuts:
                 dest_folder = os.path.join(main_folder, shortcuts[choice])
                 move_file(file_path, dest_folder)
-                undo_stack.append((file_path, dest_folder))
+                undo_stack.append((os.path.join(dest_folder, filename), downloads_folder))
                 break
             elif choice == 'p' and undo_stack:
                 last_move = undo_stack.pop()
-                shutil.move(last_move[1], downloads_folder)
-                print(f"{os.path.basename(last_move[1])} moved back to downloads folder")
+                shutil.move(last_move[0], last_move[1])
+                print(f"{os.path.basename(last_move[0])} moved back to downloads folder")
+                break
+            elif choice == 'l':
+                print(f"Skipped {filename}")
                 break
             else:
                 print("Invalid choice. Try again.")
