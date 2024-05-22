@@ -16,6 +16,10 @@ def move_file(file_path, destination_folder):
     shutil.move(file_path, destination_folder)
     print("{} moved to {}".format(os.path.basename(file_path), destination_folder))
 
+def delete_file(file_path):
+    os.remove(file_path)
+    print("{} deleted".format(os.path.basename(file_path)))
+
 class ImageMoverApp:
     def __init__(self, root, main_folder, sub_folders):
         self.root = root
@@ -34,6 +38,7 @@ class ImageMoverApp:
         self.button_frame.pack()
         
         self.create_buttons()
+        self.bind_keys()
 
         self.next_image()
 
@@ -45,8 +50,24 @@ class ImageMoverApp:
         undo_button = tk.Button(self.button_frame, text="Undo", command=self.undo_last_move)
         undo_button.pack(side=tk.LEFT)
         
-        skip_button = tk.Button(self.button_frame, text="Skip", command=self.skip_image)
-        skip_button.pack(side=tk.LEFT)
+        delete_button = tk.Button(self.button_frame, text="Delete", command=self.delete_image)
+        delete_button.pack(side=tk.LEFT)
+
+    def bind_keys(self):
+        for key in self.shortcuts.keys():
+            self.root.bind(key, self.key_move_image)
+        
+        self.root.bind('u', self.key_undo_last_move)
+        self.root.bind('d', self.key_delete_image)
+
+    def key_move_image(self, event):
+        self.move_image(event.char)
+
+    def key_undo_last_move(self, event):
+        self.undo_last_move()
+
+    def key_delete_image(self, event):
+        self.delete_image()
 
     def next_image(self):
         self.label.config(image='')
@@ -60,8 +81,10 @@ class ImageMoverApp:
             messagebox.showinfo("Info", "No more images in the downloads folder.")
             self.root.quit()
 
-    def skip_image(self):
-        self.next_image()
+    def delete_image(self):
+        if self.current_file:
+            delete_file(self.current_file)
+            self.next_image()
 
     def move_image(self, shortcut):
         if self.current_file and shortcut in self.shortcuts:
