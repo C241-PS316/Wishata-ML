@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 # Load the Keras model
-model = tf.keras.models.load_model('Model/combined_model.h5')
+model = tf.keras.models.load_model('Model50/sce_model.keras')
 
 # Print model summary to identify potential issues
 model.summary()
@@ -25,7 +25,7 @@ converter.experimental_new_converter = True
 try:
     tflite_model = converter.convert()
     # Save the converted model
-    with open("Model/combined_model.tflite", "wb") as f:
+    with open("Model50/sce_model.tflite", "wb") as f:
         f.write(tflite_model)
     print("Model conversion successful.")
 except Exception as e:

@@ -1,0 +1,3 @@
+scenery_classes = ['Nature', 'Urban']
+environment_classes = ['Land', 'Water']
+category_classes = ['Attraction', 'Greenery', 'Historical']
