@@ -20,7 +20,7 @@ This project consist of 900 images for each class. With the total of the dataset
 2. Create Conda environment 
 ```conda create env -f env.yml```
 3. Activate the Conda environment 
-```conda activate env.yml```
+```conda activate wishata```
 4. Run the notebook:
 open and run the `wishata_TFLite.ipynb` notebook
 
