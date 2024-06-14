@@ -109,7 +109,7 @@ def main():
         return
     
     main_folder = "category"
-    sub_folders = ["attractions", "historical", "greenery"]
+    sub_folders = ["historical", "greenery", "attraction"]
     
     create_folders(main_folder, sub_folders)
     
