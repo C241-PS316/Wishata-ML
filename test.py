@@ -5,10 +5,10 @@ import tensorflow as tf
 
 img_width, img_height = 224, 224
 
-loaded_combined_model = tf.keras.models.load_model("Model/combined_model.h5")
+loaded_combined_model = tf.keras.models.load_model("Model2/combined_model.h5")
 
 # Load an example image from the dataset
-image_path = "Test/test1.jpg" 
+image_path = "Test/alun.jpg" 
 test_image = image.load_img(image_path, target_size=(img_width, img_height))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis=0)
