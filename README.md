@@ -28,7 +28,7 @@ This project consist of 900 images for each class. With the total of the dataset
 ## How to Use
 1. Clone the repository.
 2. Create Conda environment 
-```conda create env -f env.yml```
+```conda env create -f env.yml```
 3. Activate the Conda environment 
 ```conda activate wishata```
 4. Run the notebook:
